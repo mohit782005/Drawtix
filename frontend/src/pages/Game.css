@@ -1,0 +1,284 @@
+/* =============================================================================
+   Game.css — Main game page layout
+   ============================================================================= */
+
+.game {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+/* ─── Top bar ────────────────────────────────────────────────────────────── */
+.game-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--border-primary);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topbar-logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.topbar-round {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-primary);
+}
+
+.topbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.room-code-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.room-code-badge:hover {
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.room-code-badge .code {
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-blue);
+}
+
+/* ─── Main layout (3-column) ─────────────────────────────────────────────── */
+.game-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 240px 1fr 320px;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .game-main {
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto 1fr;
+  }
+  .game-sidebar-left {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    border-right: none;
+    border-bottom: 1px solid var(--border-primary);
+    max-height: 100px;
+  }
+  .game-center {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .game-sidebar-right {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .game {
+    height: auto;
+    min-height: 100vh;
+  }
+  .game-main {
+    display: flex;
+    flex-direction: column;
+    overflow-y: visible;
+  }
+  .game-sidebar-left {
+    max-height: none;
+  }
+  .game-sidebar-right {
+    height: 400px;
+    border-left: none;
+    border-top: 1px solid var(--border-primary);
+  }
+  .game-center {
+    min-height: 400px;
+  }
+}
+
+/* ─── Left sidebar (players) ─────────────────────────────────────────────── */
+.game-sidebar-left {
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* ─── Center (canvas area) ───────────────────────────────────────────────── */
+.game-center {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Right sidebar (chat) ───────────────────────────────────────────────── */
+.game-sidebar-right {
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Waiting room overlay ───────────────────────────────────────────────── */
+.waiting-room {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.waiting-room h2 {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.waiting-room .room-code-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.waiting-room .room-code-display label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.waiting-room .room-code-box {
+  padding: 1rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glow-blue);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-block;
+}
+
+.waiting-room .room-code-box .code-text {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 6px;
+}
+
+.waiting-room .room-code-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.waiting-players {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.waiting-players .player-count {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.waiting-player-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.waiting-player-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  animation: popIn 0.3s ease;
+}
+
+.waiting-player-chip.is-host {
+  border-color: var(--accent-purple);
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.waiting-player-chip .host-badge {
+  font-size: 0.7rem;
+  color: var(--accent-purple);
+  font-weight: 600;
+}
+
+.start-game-btn {
+  margin-top: 1rem;
+}
+
+.waiting-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ─── Copied toast ───────────────────────────────────────────────────────── */
+.copied-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-green);
+  color: white;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  animation: fadeInUp 0.3s ease;
+  z-index: 100;
+}

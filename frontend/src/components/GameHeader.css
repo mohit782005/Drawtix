@@ -1,0 +1,148 @@
+/* =============================================================================
+   GameHeader.css — Styles for the top status bar and timer
+   ============================================================================= */
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--border-primary);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.header-logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.round-badge {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-primary);
+  font-weight: 600;
+}
+
+.header-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.word-display {
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.word-reveal {
+  font-size: 1.2rem;
+  color: var(--accent-yellow);
+  font-weight: 500;
+}
+
+.word-reveal strong {
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex: 1;
+}
+
+/* ─── Timer ──────────────────────────────────────────────────────────────── */
+.timer-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
+}
+
+.timer-container.urgent {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+  animation: pulse 1s infinite;
+}
+
+.timer-icon {
+  font-size: 1.1rem;
+}
+
+.timer-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  min-width: 28px;
+  text-align: center;
+}
+
+.timer-container.urgent .timer-value {
+  color: var(--accent-red);
+}
+
+/* ─── Room Code ──────────────────────────────────────────────────────────── */
+.room-code-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.room-code-badge:hover {
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.room-code-badge .code {
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-blue);
+}
+
+@media (max-width: 768px) {
+  .header-left .round-badge {
+    display: none;
+  }
+  .word-display {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+}
